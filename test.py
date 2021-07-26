@@ -5,10 +5,11 @@ from gentestdata import GenData
 import os
 import sys
 import time
+from abc import ABC, abstractmethod
 
 
 class Sorting():
-    algs = {"Bubble-Sort": "Nice", "Bogosort": "best Sorting Alg"}
+    algs = {"BubbleSort": "Nice", "BogoSort": "best Sorting Alg"}
 
     @classmethod
     def getSortList(cls):
@@ -27,7 +28,6 @@ class Sorting():
                 print("- "+k)
 
     def __init__(self, input_path, timer=True, peak=False):
-        self.algnamemap = {"bubble-sort": bubbleSort, "Bogosort": bogoSort}
         self.path = input_path
         self.startime = 0
         self.endtime = 0
@@ -51,14 +51,23 @@ class Sorting():
             print(self.nums[0].split()[:10])
 
 
-class bubbleSort(Sorting):
-    def __init__(self):
+class AbstractSort(ABC):
+    def __init__(self, to_sort):
+        self.to_sort = to_sort
+
+    @abstractmethod
+    def sort(self):
         pass
 
 
-class bogoSort(Sorting):
-    def __init__(self):
-        pass
+class BubbleSort(AbstractSort):
+    def sayName():
+        print("Bubble Sort")
+
+
+class BogoSort(AbstractSort):
+    def sayName():
+        print("Bogo Sort")
 
 
 def main():
@@ -83,6 +92,7 @@ def sortInfo(verbal=False):
 
 
 def runSort():
+    sorting_algs = {"BubbleSort": BubbleSort, "BogoSort": BogoSort}
     sortInfo()
     files = []
     for file in glob.glob("data/*.txt"):
@@ -116,9 +126,12 @@ def runSort():
         to_sort = [ans['files']]
 
     for file in to_sort:  # create sorter
-        sorter = Sorting(file, peak=False)
-        sorter.loadNums()
+        # sorter = Sorting(file, peak=False)
+        # sorter.loadNums()
         for alg in algs:
+            to_s
+            sorter = Sorting.getSortingAlgs()[alg]
+            sorter.sayName()
             pass
 
 
