@@ -6,7 +6,7 @@ import sympy
 
 
 def main():
-    valid_algs = ['nums', 'primes', 'randnums', 'fib']
+    valid_algs = ['numbers', 'primes', 'randnums', 'fib']
     args = {'hash': 0, 'alg': valid_algs[0], 'entries': 100}
     count = 0
     for key in args.keys():
@@ -16,7 +16,7 @@ def main():
                 continue
             if(key == 'entries' and int(sys.argv[count]) < 2):
                 print("entries must be >=2, entries set to 2!")
-                args[entries] = 2
+                args['entries'] = 2
                 continue
             args[key] = sys.argv[count]
         except IndexError:
@@ -30,7 +30,7 @@ def main():
 class GenData():
     def __init__(self, path=os.path.dirname(sys.argv[0]), hash=0, alg='dummy', entries=100):
         self.algmap = {"fib": self.fib, "primes": self.primes,
-                       "nums": self.nums, "randnums": self.randnums, "dummy": self.dummy}
+                       "numbers": self.numbers, "randnums": self.randnums, "dummy": self.dummy}
         self.path = path
         self.hash = int(hash)
         self.algname = alg
@@ -55,7 +55,7 @@ class GenData():
         rand_range = random.randint(self.entries, self.entries*factor)
         self.nums = list(random.sample(range(rand_range), self.entries))
 
-    def nums(self):
+    def numbers(self):
         self.nums = [i for i in range(self.entries)]
 
     def dummy(self):

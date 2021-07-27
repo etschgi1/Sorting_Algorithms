@@ -105,7 +105,7 @@ class BogoSort(AbstractSort):
 
 
 def main():
-    commands = {"reset nums": resetNums,
+    commands = {"reset all nums": resetallNums,
                 "run sort": runSort, "help": None, "quit": None, "sort info": sortInfo}
     while True:
         ui = None
@@ -175,7 +175,7 @@ def runSort():
     pprint(times)
 
 
-def resetNums():
+def resetallNums():
     Seed = int(input("Seed = "))
     Count = int(input("Count = (Max = 10.000) "))
     Seed, Count = min(0, Seed), min(max(Count, 2), 10000)
