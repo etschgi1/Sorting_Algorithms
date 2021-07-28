@@ -1,10 +1,16 @@
 from abc import ABC, abstractmethod
+from random import randrange
+from math import inf
 
 
 class AbstractSort(ABC):
-    def __init__(self, to_sort):
+    """Abstract sort Baseclass"""
+
+    def __init__(self, to_sort, log_swaps=True):
         self.to_sort = to_sort
         self.length = len(to_sort)
+        self.log_swaps = log_swaps
+        self.totalswaps = 0
 
     @abstractmethod
     def sort(self):
@@ -14,6 +20,11 @@ class AbstractSort(ABC):
         temp = self.to_sort[i1]
         self.to_sort[i1] = self.to_sort[i2]
         self.to_sort[i2] = temp
+        if self.log_swaps:
+            self.totalswaps += 1
+
+    def getTotalSwaps(self):
+        return self.totalswaps
 
     def checkSort(self):
         for n in range(len(self.to_sort)-1):
@@ -56,3 +67,48 @@ class BogoSort(AbstractSort):
             r1 = randrange(0, self.length)
             r2 = randrange(0, self.length)
             super().swap(r1, r2)
+
+
+class SelectionSort(AbstractSort):
+    """Implementation of Selection Sort
+    Space Complexity: O(1)
+    Time Complexity: O(n^2)"""
+
+    def getName(self):
+        return "Selection Sort"
+
+    def sort(self):
+        smallestpos = 0
+        for start in range(self.length):
+            smallest = inf
+            for count in range(start, self.length):
+                val = self.to_sort[count]
+                if val < smallest:
+                    smallestpos, smallest = count, val
+            super().swap(start, smallestpos)
+
+
+class OptimizedSelectionSort(AbstractSort):
+    """Implementation of an optimized Selection Sort
+    Space Complexity: O(1)
+    Time Complexity: O(n^2) (best case twice as fast as ordinary Selection Sort)"""
+
+    def getName(self):
+        return "Optimized Selection Sort"
+
+    def sort(self):
+        smallestpos = 0
+        biggestpos = 0
+        for start in range(self.length//2):  # Only have length
+            smallest = inf
+            biggest = -inf
+            for count in range(start, self.length-start):
+                val = self.to_sort[count]
+                if val < smallest:
+                    smallestpos, smallest = count, val
+                if val > biggest:
+                    biggestpos, biggest = count, val
+            super().swap(start, smallestpos)
+            # change if biggest was switched!
+            biggestpos = smallestpos if biggestpos == start else biggestpos
+            super().swap(self.length-start-1, biggestpos)

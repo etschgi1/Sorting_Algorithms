@@ -40,7 +40,7 @@ class GenData():
         random.seed()
 
     def getGeneratorAlgs(self):
-        return self.algmap.keys()
+        return list(self.algmap.keys())
 
     def getData(self):
         self.alg()  # run Alg
