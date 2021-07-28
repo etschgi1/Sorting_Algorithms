@@ -137,3 +137,18 @@ class OptimizedSelectionSort(AbstractSort):
             super().swap(self.length-start-1, biggestpos)
 
 
+class TimeSort(AbstractSort):
+    """Hybrid Algorithm using Mergesort and/or Insertionsort depending on array size
+    Space Complexity: worst: O(n)
+    Time Complexity: best: O(n), avg: O(n*log(n)) (but often better)"""
+    @staticmethod
+    def getName(info_list=False):
+        name = "Time Sort (Python internal)"
+        info = """Timsort ist ein hybrider Sortieralgorithmus, der von Mergesort und Insertionsort abgeleitet ist. Er wurde entwickelt, um auf verschiedenen realen Daten schnell zu arbeiten. Er wurde 2002 von Tim Peters für die Nutzung in Python entwickelt und ist ab der Version 2.3 der Standard-Sortieralgorithmus in Python. Mittlerweile wird er auch in Java SE 7 und auf der Android-Plattform genutzt."""
+        info_link = "https://de.wikipedia.org/wiki/Timsort"
+        if info_list:
+            return [name, info, info_link]
+        return name
+
+    def sort(self):
+        self.to_sort = sorted(self.to_sort)
