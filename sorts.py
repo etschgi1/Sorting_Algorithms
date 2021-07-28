@@ -38,8 +38,14 @@ class BubbleSort(AbstractSort):
     Space Complexity: O(1)
     Time Complexity: O(n^2) best and avg case"""
 
-    def getName(self):
-        return "Bubble Sort"
+    @staticmethod
+    def getName(info_list=False):
+        name = "Bubble Sort"
+        info = """Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted. The algorithm, which is a comparison sort, is named for the way smaller or larger elements "bubble" to the top of the list."""
+        info_link = "https://en.wikipedia.org/wiki/Bubble_sort"
+        if info_list:
+            return [name, info, info_link]
+        return name
 
     def sort(self):
         n = self.length
@@ -58,9 +64,14 @@ class BogoSort(AbstractSort):
     """The best Sorting Algorithm. Don't try to sort lists with more than 10 entries
     Space Complexity: O(1)
     Time Complexity: best: O(1), worst: O(∞)"""
-
-    def getName(self):
-        return "Bogo Sort"
+    @staticmethod
+    def getName(info_list=False):
+        name = "Bogo Sort"
+        info = """In computer science, bogosort (also known as permutation sort, stupid sort, or slowsort) is a highly inefficient sorting algorithm based on the generate and test paradigm. The function successively generates permutations of its input until it finds one that is sorted. It is not useful for sorting, but may be used for educational purposes, to contrast it with more efficient algorithms."""
+        info_link = "https://en.wikipedia.org/wiki/Bogosort"
+        if info_list:
+            return [name, info, info_link]
+        return name
 
     def sort(self):
         while not super().checkSort():
@@ -74,8 +85,14 @@ class SelectionSort(AbstractSort):
     Space Complexity: O(1)
     Time Complexity: O(n^2)"""
 
-    def getName(self):
-        return "Selection Sort"
+    @staticmethod
+    def getName(info_list=False):
+        name = "Selection Sort"
+        info = """In computer science, selection sort is an in-place comparison sorting algorithm. It has an O(n^2) time complexity, which makes it inefficient on large lists, and generally performs worse than the similar insertion sort. Selection sort is noted for its simplicity and has performance advantages over more complicated algorithms in certain situations, particularly where auxiliary memory is limited."""
+        info_link = "https://en.wikipedia.org/wiki/Selection_sort"
+        if info_list:
+            return [name, info, info_link]
+        return name
 
     def sort(self):
         smallestpos = 0
@@ -93,8 +110,14 @@ class OptimizedSelectionSort(AbstractSort):
     Space Complexity: O(1)
     Time Complexity: O(n^2) (best case twice as fast as ordinary Selection Sort)"""
 
-    def getName(self):
-        return "Optimized Selection Sort"
+    @staticmethod
+    def getName(info_list=False):
+        name = "Optimized Selection Sort"
+        info = """In computer science, selection sort is an in-place comparison sorting algorithm. It has an O(n^2) time complexity, which makes it inefficient on large lists, and generally performs worse than the similar insertion sort. Selection sort is noted for its simplicity and has performance advantages over more complicated algorithms in certain situations, particularly where auxiliary memory is limited."""
+        info_link = "https://en.wikipedia.org/wiki/Selection_sort"
+        if info_list:
+            return [name, info, info_link]
+        return name
 
     def sort(self):
         smallestpos = 0
@@ -112,3 +135,5 @@ class OptimizedSelectionSort(AbstractSort):
             # change if biggest was switched!
             biggestpos = smallestpos if biggestpos == start else biggestpos
             super().swap(self.length-start-1, biggestpos)
+
+

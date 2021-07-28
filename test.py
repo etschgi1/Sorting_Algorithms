@@ -10,25 +10,20 @@ from sorts import *
 
 
 class Sorting():
-    algs = {"BubbleSort": "Nice", "BogoSort": "best Sorting Alg",
-            "SelectionSort": "Takes the min of every pass and moves it to front",
-            "OptimizedSelectionSort": "Sorts using min and max of each pass twice as fast as original"}
+    algs = {}
+    for subcls in AbstractSort.__subclasses__():
+        algs[subcls.__name__] = subcls.getName(info_list=True)
+
+    @classmethod
+    def printAlgInfo(cls):
+        print("----  Algorithms  ----", end="\n\n")
+        for info_list in cls.algs.values():
+            print("  -"+info_list[0]+"\n" +
+                  info_list[1]+"\nSource: "+info_list[2]+"\n")
 
     @classmethod
     def getSortList(cls):
         return list(cls.algs.keys())
-
-    @classmethod
-    def printSorts(cls, Info=False):
-        print("Available sorts: ", end="\n")
-        if Info:
-            print("Name \t \t Info")
-            for k, v in cls.algs.items():
-                print("- "+k+": "+v)
-        else:
-            print("Name")
-            for k in cls.algs.keys():
-                print("- "+k)
 
     def __init__(self, input_path, timer=True, peak=False):
         self.path = input_path
@@ -70,8 +65,8 @@ def main():
         commands[ui]()
 
 
-def sortInfo(verbal=False):
-    Sorting.printSorts(verbal)
+def sortInfo():
+    Sorting.printAlgInfo()
 
 
 def runSort():
